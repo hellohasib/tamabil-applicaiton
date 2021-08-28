@@ -1,0 +1,105 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="layout">
+<head>
+    <title>Cargo</title>
+</head>
+<body>
+<section layout:fragment="header">
+    <h1>Cargo Entry</h1>
+    <ol class="breadcrumb">
+        <li><a href="/"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+        <li class="active">Cargo Entry</li>
+    </ol>
+</section>
+<div layout:fragment="content">
+    <div class="box">
+        <div class="box-header with-border">
+            <h3 class="box-title">Form</h3>
+            <div class="box-tools pull-right">
+                <a href="/cargo" type="button" class="btn btn-box-tool"><i class="fa fa-list-ul"></i></a>
+            </div>
+        </div>
+        <form data-toggle="validator" role="form" th:object="${cargo}" th:action="@{/cargo/save}" method="post">
+            <div class="box-body">
+
+                <input type="hidden" th:field="*{id}"/>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="importid">Import Id</label>
+                        <input type="text" required="true" class="form-control" th:field="*{importid}" id="importid" />
+                    </div>
+                    <div class="form-group">
+                        <label for="serialno">Serial No</label>
+                        <input type="text" required="true" class="form-control" th:field="*{serialno}" id="serialno" />
+                    </div>
+                    <div class="form-group">
+                        <label for="lcno">Lc No</label>
+                        <input type="text" required="true" class="form-control" th:field="*{lcno}" id="lcno" />
+                    </div>
+                    <div class="form-group">
+                        <label for="lcdate">Lc Date</label>
+                        <input type="date" required="true" class="form-control" th:field="*{lcdate}" id="lcdate" />
+                    </div>
+                    <div class="form-group">
+                        <label for="lcbankbranch">Lc Bank Branch</label>
+                        <input type="text" required="true" class="form-control" th:field="*{lcbankbranch}" id="lcbankbranch" />
+                    </div>
+                </div>
+                <div class="col-md-4">
+
+                    <div class="form-group">
+                        <label for="vehicleid">Vehicle Id</label>
+                        <input type="text" required="true" class="form-control" th:field="*{vehicleid}" id="vehicleid" />
+                    </div>
+                    <div class="form-group">
+                        <label for="pilotid">Pilot Id</label>
+                        <input type="text" required="true" class="form-control" th:field="*{pilotid}" id="pilotid" />
+                    </div>
+                    <div class="form-group">
+                        <label for="checkoutvalidity">Checkout Validity</label>
+                        <input type="text" required="true" class="form-control" th:field="*{checkoutvalidity}" id="checkoutvalidity" />
+                    </div>
+                    <div class="form-group">
+                        <label for="goodstype">Goods Type</label>
+                        <input type="text" required="true" class="form-control" th:field="*{goodstype}" id="goodstype" />
+                    </div>
+                    <div class="form-group">
+                        <label for="unitofmeasurement">Unit of Measurement</label>
+                        <input type="text" required="true" class="form-control" th:field="*{unitofmeasurement}" id="unitofmeasurement" />
+                    </div>
+
+                </div>
+                <div class="col-md-4">
+
+                    <div class="form-group">
+                        <label for="descriptionofgood">Description of Good</label>
+                        <input type="number" required="true" class="form-control" th:field="*{descriptionofgood}" id="descriptionofgood" />
+                    </div>
+                    <div class="form-group">
+                        <label for="declaredweight">Declared Weight</label>
+                        <input type="number" required="true" class="form-control" th:field="*{declaredweight}" id="declaredweight" />
+                    </div>
+                    <div class="form-group">
+                        <label for="numberofpackage">Number of Package</label>
+                        <input type="number" required="true" class="form-control" th:field="*{numberofpackage}" id="numberofpackage" />
+                    </div>
+                    <div class="form-group">
+                        <label for="importerid">Importer Id</label>
+                        <input type="number" required="true" class="form-control" th:field="*{importerid}" id="importerid" />
+                    </div>
+                    <div class="form-group">
+                        <label for="cnfid">C&F Id</label>
+                        <input type="number" required="true" class="form-control" th:field="*{cnfid}" id="cnfid" />
+                    </div>
+                </div>
+
+            </div>
+            <div class="box-footer">
+                <button class="btn btn-primary" type="submit">Save</button>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>

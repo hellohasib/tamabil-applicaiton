@@ -1,0 +1,75 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout">
+<head>
+    <title>Cargo</title>
+</head>
+<body>
+<section layout:fragment="header">
+    <h1>Cargo</h1>
+<ol class="breadcrumb">
+    <li><a href="/"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+    <li class="active">Cargo</li>
+</ol>
+</section>
+<div layout:fragment="content">
+    <div class="box">
+        <div class="box-header with-border">
+            <h3 class="box-title">Lists</h3>
+            <div class="box-tools pull-right">
+                <a href="/cargo/add" type="button" class="btn btn-box-tool"><i class="fa fa-plus"></i></a>
+                <br clear="all" />
+            </div>
+        </div>
+        <div class="box-body no-padding">
+            <table class="table table-striped">
+                <tr>
+                    <th>ID</th>
+                    <th>Import ID</th>
+                    <th>Serial No</th>
+                    <th>Lc No</th>
+                    <th>Lc Date</th>
+                    <th>Lc Bank Branch</th>
+                    <th>Vehicle Id</th>
+                    <th>Pilot Id</th>
+                    <th>Goods Type</th>
+                    <th>Description of Good</th>
+                    <th>Declared Weight</th>
+                    <th>Importer Id</th>
+                    <th>C&F Id</th>
+                    <th>Action</th>
+                </tr>
+                <tr th:each="row : ${list}">
+                    <td th:text="${row.id}"></td>
+                    <td th:text="${row.importid}"></td>
+                    <td th:text="${row.serialno}"></td>
+                    <td th:text="${row.lcno}"></td>
+                    <td th:text="${row.lcdate}"></td>
+                    <td th:text="${row.lcbankbranch}"></td>
+                    <td th:text="${row.vehicleid}"></td>
+                    <td th:text="${row.pilotid}"></td>
+                    <td th:text="${row.goodstype}"></td>
+                    <td th:text="${row.descriptionofgood}"></td>
+                    <td th:text="${row.declaredweight}"></td>
+                    <td th:text="${row.importerid}"></td>
+                    <td th:text="${row.cnfid}"></td>
+                    <td>
+                        <a th:href="${'/cargo/edit/' + row.id}">Edit</a> |
+                        <a th:href="${'/cargo/delete/' + row.id}">Delete</a>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="box-footer clearfix">
+            <ul class="pagination pagination-sm no-margin pull-right">
+                <li><a href="/cargo/1">First</a></li>
+                <li th:each="p : ${#numbers.sequence(1, endIndex/beginIndex)}" th:class="${p == currentIndex} ? 'active' : ''">
+                    <a th:href="${'/cargo/' + p}" th:text="${p}"></a>
+                </li>
+                <li><a th:href="${'/cargo/' + endIndex}">Last</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+</body>
+</html>
