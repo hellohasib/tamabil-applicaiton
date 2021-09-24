@@ -20,7 +20,11 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import java.security.Principal;
+import java.text.SimpleDateFormat;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -78,17 +82,42 @@ public class WeightController {
     @PostMapping(value = "/save")
     public String save(Weight weight, final RedirectAttributes ra,HttpServletRequest request) throws UnirestException {
         Principal principal = request.getUserPrincipal();
+        String netweight="";
+        SimpleDateFormat format=new SimpleDateFormat();
         Date now=new Date() ;
         weight.setCreatedAt(now);
         weight.setCreatedBy(principal.getName());
+        if (weight.getUnloadweight()>0){
+            weight.setNetweight(weight.getLoadweight()-weight.getUnloadweight());
+            netweight=String.valueOf(weight.getLoadweight()-weight.getUnloadweight());
+        }
         Weight save = weightService.save(weight);
         ra.addFlashAttribute("successFlash", "Weight saved successfully");
         Optional<Importer> importerList=importerService.findById(Long.parseLong(weight.getImporterid()+""));
         String sendTo= "880"+String.valueOf(importerList.get().getCellphone());
-        String text= "Dear,%20"+importerList.get().getImportername().toString()+"%20your%20cargo%20entered%20our%20Tamabil%20Port%20successfully.%20The%20weight%20of%20goods%20is%20"+weight.getNetweight()+"KG.%20Thank%20you.";
-        Unirest.setTimeouts(0, 0);
-        HttpResponse<String> response = Unirest.post("http://217.172.190.215/sendtext?apikey=78c04812eccc01f7&secretkey=582ef419&callerID=8809612448805&toUser="+sendTo+"&messageContent="+text)
-                .asString();
+        String importername=importerList.get().getImportername();
+        String importerfullname=importername.replaceAll(" ","%20");
+
+        if (weight.getLoadweight()>0 && weight.getUnloadweight()>0){
+            String pattern = "yyyy-MM-dd";
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+            String date = simpleDateFormat.format(new Date());
+            String timeColonPattern = "hh:mm:ss a";
+            DateTimeFormatter timeColonFormatter = DateTimeFormatter.ofPattern(timeColonPattern);
+            LocalTime colonTime = LocalTime.of(17, 35, 50);
+
+            String text= "Date:%20"+date+"%0a"+
+                    "Time:%20"+colonTime+"%0a"+
+                    "Importer:%20"+importerfullname+"%0a"+
+                    "Cargo%20entered%20into%20Tamabil%20Landport"+"%0a"+
+                    "Weight%20of%20goods:%20"+netweight+"%0a"+
+                    "Thanks,%20BSBK";
+
+            Unirest.setTimeouts(0, 0);
+            HttpResponse<String> response = Unirest.post("http://217.172.190.215/sendtext?apikey=78c04812eccc01f7&secretkey=582ef419&callerID=8809612448805&toUser="+sendTo+"&messageContent="+text)
+                    .asString();
+        }
+
         return "redirect:/weight";
 
     }
@@ -99,6 +128,10 @@ public class WeightController {
         weightService.delete(id);
         return "redirect:/weight";
 
+    }
+    @GetMapping("allweight")
+    public List<Weight> getAllWeight(){
+        return weightService.getAll();
     }
 
 }

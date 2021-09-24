@@ -1,0 +1,103 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="layout">
+<head>
+    <title>Pilots</title>
+</head>
+
+<body onload="window.print()">
+
+<div layout:fragment="content">
+    <div class="box">
+        <div class="box-header with-border">
+            <center><h3>Pilot Temporary ID Card</h3></center>
+        </div>
+        <div class="box-body no-padding">
+            <table class="table table-striped">
+                <tr th:each="data : ${pilot}">
+                    <th>Name</th>
+                    <th><span th:text="${data.pilotname}"></span></th>
+                    </tr>
+                <tr th:each="data : ${pilot}">
+                    <th>Father Name</th>
+                    <th><span th:text="${data.fathername}"></span></th>
+                </tr>
+                <tr th:each="data : ${pilot}">
+                    <th>Address</th>
+                    <th><span th:text="${data.address}"></span></th>
+                </tr>
+                <tr th:each="data : ${pilot}">
+                    <th>Driving License</th>
+                    <th><span th:text="${data.drivinglicense}"></span></th>
+                </tr>
+                <tr th:each="data : ${pilot}">
+                    <th>Date of Birth</th>
+                    <th><span th:text="${data.dob}"></span></th>
+                </tr>
+                <tr th:each="data : ${pilot}">
+                    <th>Cellphone</th>
+                    <th><span th:text="${data.cellphone}"></span></th>
+                </tr>
+                <tr th:each="data : ${pilot}">
+                    <th>Nationality</th>
+                    <th><span th:text="${data.nationality}"></span></th>
+                </tr>
+                <tr th:each="data : ${pilot}">
+                    <th>Country</th>
+                    <th><span th:text="${data.country}"></span></th>
+                </tr>
+
+
+            </table>
+        </div>
+<!--        <form data-toggle="validator" role="form" th:object="${pilot}" th:action="@{/pilot/save}" method="post">-->
+<!--            <div class="box-body">-->
+
+<!--                <input type="hidden" th:field="*{id}"/>-->
+<!--                <div class="col-md-6">-->
+<!--                    <div class="form-group">-->
+<!--                        <label for="pilotname">Pilot Name</label>-->
+<!--                        <input type="text" required="true" class="form-control" th:field="*{pilotname}" id="pilotname" />-->
+<!--                    </div>-->
+<!--                    <div class="form-group">-->
+<!--                        <label for="fathername">Father's Name</label>-->
+<!--                        <input type="text" required="true" class="form-control" th:field="*{fathername}" id="fathername" />-->
+<!--                    </div>-->
+<!--                    <div class="form-group">-->
+<!--                        <label for="address">Address</label>-->
+<!--                        <input type="text" required="true" class="form-control" th:field="*{address}" id="address" />-->
+<!--                    </div>-->
+<!--                    <div class="form-group">-->
+<!--                        <label for="drivinglicense">Driving License</label>-->
+<!--                        <input type="text" required="true" class="form-control" th:field="*{drivinglicense}" id="drivinglicense" />-->
+<!--                    </div>-->
+
+<!--                </div>-->
+<!--                <div class="col-md-6">-->
+<!--                    <div class="form-group">-->
+<!--                        <label for="dob">Date of Birth</label>-->
+<!--                        <input type="date" required="true" class="form-control" th:field="*{dob}" id="dob" />-->
+<!--                    </div>-->
+<!--                    <div class="form-group">-->
+<!--                        <label for="cellphone">Cell Phone</label>-->
+<!--                        <input type="number" required="true" class="form-control" th:field="*{cellphone}" id="cellphone" />-->
+<!--                    </div>-->
+<!--                    <div class="form-group">-->
+<!--                        <label for="nationality">Nationality</label>-->
+<!--                        <input type="text" required="true" class="form-control" th:field="*{nationality}" id="nationality" />-->
+<!--                    </div>-->
+<!--                    <div class="form-group">-->
+<!--                        <label for="country">Country</label>-->
+<!--                        <input type="text" required="true" class="form-control" th:field="*{country}" id="country" />-->
+<!--                    </div>-->
+
+<!--                </div>-->
+
+<!--            </div>-->
+<!--            <div class="box-footer">-->
+<!--            </div>-->
+<!--        </form>-->
+    </div>
+</div>
+</body>
+</html>

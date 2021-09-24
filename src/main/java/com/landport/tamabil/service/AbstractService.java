@@ -3,6 +3,8 @@ package com.landport.tamabil.service;
 
 import com.landport.tamabil.model.AbstractModel;
 import com.landport.tamabil.model.Importer;
+import com.landport.tamabil.model.Vehicle;
+import com.landport.tamabil.model.Weight;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -10,6 +12,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,7 +24,7 @@ public abstract class AbstractService<T extends AbstractModel<Long>, Long extend
 
     public Page<T> getList(Integer pageNumber) {
         PageRequest pageRequest =
-                PageRequest.of(pageNumber - 1, PAGE_SIZE, Sort.Direction.ASC, "id");
+                PageRequest.of(pageNumber - 1, PAGE_SIZE, Sort.Direction.DESC, "id");
 
         return getRepository().findAll(pageRequest);
     }

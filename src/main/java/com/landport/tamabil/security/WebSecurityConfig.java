@@ -59,11 +59,23 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         auth.jdbcAuthentication().dataSource(datasource);
 
         // add new user "user" with password "password" - password will be encrypted
-        if (!userDetailsService.userExists("naruto")) {
+        if (!userDetailsService.userExists("admin")) {
             List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
-            authorities.add(new SimpleGrantedAuthority("USER"));
-            User userDetails = new User("naruto", encoder.encode("1234"), authorities);
+            List<GrantedAuthority> authorities2 = new ArrayList<GrantedAuthority>();
+            authorities.add(new SimpleGrantedAuthority("Admin"));
+            authorities2.add(new SimpleGrantedAuthority("User"));
+            User userDetails = new User("admin", encoder.encode("Tamabil@Admin"), authorities);
+            User userDetails1 = new User("user1", encoder.encode("Tamabil@2021"), authorities2);
+            User userDetails2 = new User("user2", encoder.encode("Tamabil@2021"), authorities2);
+            User userDetails3 = new User("user3", encoder.encode("Tamabil@2021"), authorities2);
+            User userDetails4 = new User("user4", encoder.encode("Tamabil@2021"), authorities2);
+            User userDetails5 = new User("user5", encoder.encode("Tamabil@2021"), authorities2);
             userDetailsService.createUser(userDetails);
+            userDetailsService.createUser(userDetails1);
+            userDetailsService.createUser(userDetails2);
+            userDetailsService.createUser(userDetails3);
+            userDetailsService.createUser(userDetails4);
+            userDetailsService.createUser(userDetails5);
         }
     }
 

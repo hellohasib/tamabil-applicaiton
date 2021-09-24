@@ -12,8 +12,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.thymeleaf.context.WebContext;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.security.Principal;
 
 import java.util.Date;
@@ -65,6 +67,14 @@ public class PilotController {
         return "pilot/form";
 
     }
+    @GetMapping("/printcard/{id}")
+    public String print(@PathVariable Long id, Model model) {
+
+        model.addAttribute("pilot", pilotService.get(id));
+        return "pilot/pilotcard";
+
+    }
+
 
     @PostMapping(value = "/save")
     public String save(Pilot pilot, final RedirectAttributes ra,HttpServletRequest request) {

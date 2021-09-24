@@ -47,6 +47,7 @@
             </table>
         </div>
         <div class="box-footer clearfix">
+            <input class="btn btn-success" type="button"  th:onclick="window.print()" value="print" />
             <ul class="pagination pagination-sm no-margin pull-right">
                 <li><a href="/cnf/1">First</a></li>
                 <li th:each="p : ${#numbers.sequence(1, endIndex/beginIndex)}" th:class="${p == currentIndex} ? 'active' : ''">
