@@ -1,0 +1,80 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout">
+<head>
+    <title>Weight</title>
+</head>
+
+<body>
+<section layout:fragment="header">
+    <h1>Weight</h1>
+<ol class="breadcrumb">
+    <li><a href="/"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+    <li class="active">Weight</li>
+</ol>
+</section>
+<div layout:fragment="content">
+    <div class="box">
+        <div class="box-header with-border">
+            <h3 class="box-title">Lists</h3>
+            <div class="box-tools pull-right">
+                <a href="/weight/add" type="button" class="btn btn-box-tool"><i class="fa fa-plus"></i></a>
+                <br clear="all" />
+            </div>
+        </div>
+        <div class="box-body no-padding">
+            <table class="table table-striped">
+                <tr>
+                    <th>ID</th>
+                    <th>Truck Serial No</th>
+                    <th>Driver Name</th>
+                    <th>Vehicle Reg No</th>
+                    <th>Exporter Name</th>
+                    <th>Importer Name</th>
+                    <th>Importer Contact</th>
+                    <th>Goods Name</th>
+                    <th>Gross Weight</th>
+                    <th>Net Weight</th>
+                    <th>Number of Package</th>
+                    <th>lc No</th>
+                    <th>Cnf Agent</th>
+                    <th>Action</th>
+                </tr>
+                <tr th:each="row : ${list}">
+                    <td th:text="${row.id}"></td>
+                    <td th:text="${row.truckserialno}"></td>
+                    <td th:text="${row.drivername}"></td>
+                    <td th:text="${row.vehicleregno}"></td>
+                    <td th:text="${row.exportername}"></td>
+                    <td th:text="${row.importername}"></td>
+                    <td th:text="${row.importercontact}"></td>
+                    <td th:text="${row.goodsname}"></td>
+                    <td th:text="${row.grossweight}"></td>
+                    <td th:text="${row.netweight}"></td>
+                    <td th:text="${row.numberofpackage}"></td>
+                    <td th:text="${row.lcno}"></td>
+                    <td th:text="${row.cnfagent}"></td>
+                    <td>
+                        <a th:href="${'/fastentry/edit/' + row.id}">Edit</a> |
+                        <a th:href="${'/fastentry/delete/' + row.id}">Delete</a>
+                    </td>
+                </tr>
+            </table>
+
+        </div>
+
+        <div class="box-footer clearfix">
+            <input class="btn btn-success" type="button"  th:onclick="window.print()" value="print" />
+            <ul class="pagination pagination-sm no-margin pull-right">
+                <li><a href="/weight/1">First</a></li>
+                <li th:each="p : ${#numbers.sequence(1, endIndex/beginIndex)}" th:class="${p == currentIndex} ? 'active' : ''">
+                    <a th:href="${'/fastentry/' + p}" th:text="${p}"></a>
+                </li>
+                <li><a th:href="${'/fastentry/' + endIndex}">Last</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

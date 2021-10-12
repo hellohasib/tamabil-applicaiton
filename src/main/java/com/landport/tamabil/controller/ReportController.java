@@ -35,12 +35,21 @@ public class ReportController {
     VehicleService vehicleService;
     @Autowired
     ImporterService importerService;
+    @Autowired
+    FastEntryService fastEntryService;
 
     @GetMapping("/add")
     public String add(Model model) {
 
         model.addAttribute("report", new Report());
         return "reports/form";
+
+    }
+    @GetMapping("/addlc")
+    public String addlc(Model model) {
+
+        model.addAttribute("report", new LcReport());
+        return "reports/lcform";
 
     }
 
@@ -95,6 +104,33 @@ public class ReportController {
             ExcelExportWeight excelExportWeight = new ExcelExportWeight(listWeight);
             excelExportWeight.export(response);
         }
+        if (report.getReporttype().equals("7")){
+            headerValue = "attachment; filename=fast_entry_report_" + currentDateTime + ".xlsx";
+            response.setHeader(headerKey, headerValue);
+            List<FastEntry> fastEntryList =  fastEntryService.getSpecificList(report.getFromdate(), report.getTodate());
+            ExcelExportFastEntry excelExportFastEntry = new ExcelExportFastEntry(fastEntryList);
+            excelExportFastEntry.export(response);
+        }
+
+
+    }
+
+    @PostMapping("/generatelcreport")
+    public void exportToExcelLc(LcReport lcReport,HttpServletResponse response ) throws IOException, ParseException {
+        System.out.println("reportcheck:"+lcReport.getFromdate()+"and"+lcReport.getTodate());
+        response.setContentType("application/octet-stream");
+        DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
+        String currentDateTime = dateFormatter.format(new Date());
+        String headerKey = "Content-Disposition";
+        String headerValue=null;
+
+
+            headerValue = "attachment; filename=fast_entry_report_" + currentDateTime + ".xlsx";
+            response.setHeader(headerKey, headerValue);
+            List<FastEntry> fastEntryList =  fastEntryService.getSpecificLcList(lcReport.getFromdate(), lcReport.getTodate(),lcReport.getLcno());
+
+            ExcelExportFastEntry excelExportFastEntry = new ExcelExportFastEntry(fastEntryList);
+            excelExportFastEntry.export(response);
 
 
     }

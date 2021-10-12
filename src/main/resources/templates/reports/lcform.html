@@ -9,7 +9,7 @@
     <h1>Report Generate</h1>
     <ol class="breadcrumb">
         <li><a href="/"><i class="fa fa-dashboard"></i> Dashboard</a></li>
-        <li class="active">Report Generate</li>
+        <li class="active">LC Report Generate</li>
     </ol>
 </section>
 <div layout:fragment="content">
@@ -20,7 +20,7 @@
                 <a href="/vehicle" type="button" class="btn btn-box-tool"><i class="fa fa-list-ul"></i></a>
             </div>
         </div>
-        <form data-toggle="validator" role="form" th:object="${report}" th:action="@{/report/generatereport}" method="post">
+        <form data-toggle="validator" role="form" th:object="${report}" th:action="@{/report/generatelcreport}" method="post">
             <div class="box-body">
 
                 <input type="hidden" th:field="*{id}"/>
@@ -42,19 +42,9 @@
                 <div class="col-md-4">
 
                     <div class="form-group">
-                        <label for="reporttype">Report Type</label>
-                        <select class="form-control" id="reporttype" name="reporttype" required="true">
-                            <option value="0">- Select -</option>
-                            <option value="1">- Cargo -</option>
-                            <option value="2">- C&F Agent -</option>
-                            <option value="3">- Importer -</option>
-                            <option value="4">- Pilot -</option>
-                            <option value="5">- Vehicles -</option>
-                            <option value="6">- Weight -</option>
-                            <option value="7">- Fast Entry -</option>
+                        <label for="lcno">Lc No</label>
+                        <input type="text" required="true" class="form-control" th:field="*{lcno}" id="lcno" />
 
-
-                        </select>
                     </div>
 
                 </div>

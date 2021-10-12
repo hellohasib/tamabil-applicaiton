@@ -1,0 +1,99 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="layout">
+<head>
+    <title>Fast Entry</title>
+</head>
+<body>
+<section layout:fragment="header">
+    <h1>Fast Weight Entry</h1>
+    <ol class="breadcrumb">
+        <li><a href="/"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+        <li class="active">Fast Weight Entry</li>
+    </ol>
+</section>
+<div layout:fragment="content">
+    <div class="box">
+        <div class="box-header with-border">
+            <h3 class="box-title">Form</h3>
+            <div class="box-tools pull-right">
+                <a href="/weight" type="button" class="btn btn-box-tool"><i class="fa fa-list-ul"></i></a>
+            </div>
+        </div>
+        <form data-toggle="validator" role="form" th:object="${fastentry}" th:action="@{/fastentry/save}" method="post">
+            <div class="box-body">
+
+                <input type="hidden" th:field="*{id}"/>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="truckserialno">Truck Serial No</label>
+                        <input type="text" required="true" class="form-control" th:field="*{truckserialno}" id="truckserialno" readonly="true"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="drivername">Driver Name</label>
+                        <input type="text" required="true" class="form-control" th:field="*{drivername}" id="drivername" />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="vehicleregno">Vehicle Reg No</label>
+                        <input type="text" required="true" class="form-control" th:field="*{vehicleregno}" id="vehicleregno" />
+                    </div>
+                    <div class="form-group">
+                        <label for="exportername">Exporter Name</label>
+                        <input type="text" required="true" class="form-control" th:field="*{exportername}" id="exportername" />
+                    </div>
+                    <div class="form-group">
+                        <label for="importername">Importer Name</label>
+                        <input type="text" required="true" class="form-control" th:field="*{importername}" id="importername" />
+                    </div>
+                    <div class="form-group">
+                        <label for="cnfagent">C&F Agent</label>
+                        <input type="text" required="true" class="form-control" th:field="*{cnfagent}" id="cnfagent" />
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="importercontact">Importer Contact</label>
+                        <input type="text" required="true" class="form-control" th:field="*{importercontact}" id="importercontact" />
+                    </div>
+                    <div class="form-group">
+                        <label for="goodsname">Goods Name</label>
+                        <input type="text" required="true" class="form-control" th:field="*{goodsname}" id="goodsname" />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="grossweight">Gross Weight</label>
+                        <input type="number" required="true" class="form-control" th:field="*{grossweight}" id="grossweight" />
+                    </div>
+                    <div class="form-group">
+                        <label for="unloadweight">Unload Weight</label>
+                        <input type="number" required="true" class="form-control" th:field="*{unloadweight}" id="unloadweight" />
+                    </div>
+<!--                    <div class="form-group" style="display:none;">-->
+<!--                        <label for="netweight">Net Weight</label>-->
+<!--                        <input type="number" required="true" class="form-control" th:field="*{netweight}" id="netweight" />-->
+<!--                    </div>-->
+                    <div class="form-group">
+                        <label for="numberofpackage">Number of Package</label>
+                        <input type="text" required="true" class="form-control" th:field="*{numberofpackage}" id="numberofpackage" />
+                    </div>
+                    <div class="form-group">
+                        <label for="lcno">Lc No</label>
+                        <input type="number" required="true" class="form-control" th:field="*{lcno}" id="lcno" />
+                    </div>
+
+
+
+                </div>
+
+            </div>
+            <div class="box-footer">
+                <button class="btn btn-primary" type="submit">Save</button>
+                <input class="btn btn-success" type="button"  th:onclick="window.print()" value="print" />
+            </div>
+
+        </form>
+    </div>
+</div>
+</body>
+</html>

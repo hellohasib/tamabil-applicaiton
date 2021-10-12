@@ -11,7 +11,8 @@
 	<groupId>com.landport</groupId>
 	<artifactId>tamabil</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>TamabilApp</name>
+	<packaging>war</packaging>
+	<name>tamabil</name>
 	<description>Landport Application for Tamabil Port</description>
 	<properties>
 		<java.version>1.8</java.version>
@@ -102,6 +103,7 @@
 	</dependencies>
 
 	<build>
+		<finalName>tamabil</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
